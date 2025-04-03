@@ -90,6 +90,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f97688f4ae73b74da18691c1cf52598, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6342759128554930039}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f97688f4ae73b74da18691c1cf52598, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3755032495733103544}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f97688f4ae73b74da18691c1cf52598, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5616353663716550780}
   m_SourcePrefab: {fileID: 100100000, guid: 5f97688f4ae73b74da18691c1cf52598, type: 3}
 --- !u!1 &5332402855932296081 stripped
 GameObject:
@@ -134,18 +140,53 @@ MonoBehaviour:
   materialOutLine:
   - {fileID: 2100000, guid: 6f97fd2b99a5e2d46b17555d6695b6e0, type: 2}
   - {fileID: 2100000, guid: 3fecd90af083e5b4c85cafbb5e548dc2, type: 2}
-  prefab: {fileID: 0}
+  prefab: {fileID: 6342759128554930039}
   estateItemBehaviour: 0
   item: {fileID: 11400000, guid: d166295f80935a44c924a3878ed1bb37, type: 2}
   TransformItemInHand:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
-  VHSAudio: {fileID: 0}
-  DialogComponents: {fileID: 0}
+  VHSAudio: {fileID: 8300000, guid: dbb3f5dc4514ffc4b8b7d2eca36b872e, type: 3}
+  DialogComponents: {fileID: 11400000, guid: 79db2cc6bdb41414e9b16c42ece63c39, type: 2}
+  <timeLine>k__BackingField: {fileID: 3755032495733103544}
+  signalAsset: {fileID: 0}
   vhsPlayed:
     m_PersistentCalls:
       m_Calls: []
+  <IsDialog>k__BackingField: 0
+--- !u!320 &3755032495733103544
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332402855932296081}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &5616353663716550780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332402855932296081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals: []
+    m_Events: []
 --- !u!23 &8773480882419994639 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: 5f97688f4ae73b74da18691c1cf52598, type: 3}

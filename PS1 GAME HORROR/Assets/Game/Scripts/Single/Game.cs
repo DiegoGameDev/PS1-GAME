@@ -2,6 +2,9 @@ using UnityEngine;
 using Player;
 using System;
 using Player.Inventory;
+using UI;
+using DialogueSystem;
+using Itens;
 
 namespace Single
 {
@@ -10,10 +13,17 @@ namespace Single
         //singles
         public static Game main;
         public GameInput gameInput;
+        public GameMessage gameMessage;
+
+        //UI
+        public ControllerSlots controllerSlots;
 
         //Game
         public Camera mainCam;
         public PlayerController Player;
+        public DialogManager dialogManager;
+        //scenes
+        public CassetePlayer cassetePlayer;
 
         //Data
         public ItemData itemData;
@@ -30,7 +40,10 @@ namespace Single
             main = this;
             mainCam = FindFirstObjectByType<Camera>();
             Player = FindFirstObjectByType<PlayerController>();
+            dialogManager = FindFirstObjectByType<DialogManager>();
+            cassetePlayer = FindFirstObjectByType<CassetePlayer>();
             gameInput = GetComponent<GameInput>();
+
             gameData.inventoryObject = slotItemSO.inventoryObject;
         }
 

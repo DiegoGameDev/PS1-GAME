@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45339f45759c69e49a230ef5a828640c, type: 3}
   m_Name: Dialog
   m_EditorClassIdentifier: 
-  dialog: []
+  dialog:
+  - profile: Diego
+    text: Zap do cria on
+  - profile: Zap
+    text: Diego ON

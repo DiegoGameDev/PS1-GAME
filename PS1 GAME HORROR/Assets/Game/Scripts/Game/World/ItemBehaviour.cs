@@ -1,5 +1,6 @@
 using Player;
 using Player.Inventory;
+using Single;
 using UnityEngine;
 
 namespace Interactive
@@ -26,7 +27,12 @@ namespace Interactive
             SetEstate(EstateItemBehaviour.Scene);
         }
 
-        protected void DestroyColliders()
+        private void OnEnable()
+        {
+            prefab = Game.main.itemData.ItemBehaviour(item);
+        }
+
+        public void DestroyColliders()
         {
             if (coll != null)
                 Destroy(coll);

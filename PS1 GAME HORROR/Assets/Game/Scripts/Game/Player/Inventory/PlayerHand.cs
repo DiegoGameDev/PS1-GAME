@@ -1,6 +1,8 @@
 ﻿using Interactive;
 using Single;
+using System;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace Player.Inventory
@@ -13,16 +15,18 @@ namespace Player.Inventory
         public int maxCapaxity { get; private set; }
         int index = 0; // -1 para a mão do player
 
-        Transform ItemTransform;
-        Transform cam;
+        //UI
+        private ControllerSlots controllerSlots;
+        private Action<int> InventoryUpdate;
+        private Action<List<Sprite>> ItensSpritesUpdate;
 
-        Vector3 offset;
-
-        private void Awake()
+        private void Start()
         {
-            //ItemTransform = GetComponentInChildren<Transform>();
-            cam = Game.main.mainCam.transform;
+            controllerSlots = Game.main.controllerSlots;
+            InventoryUpdate += controllerSlots.CurrentSlot;
+            ItensSpritesUpdate += controllerSlots.UpdateSlotsUI;
             index = -1;
+
         }
 
         public ItemBehaviour ItemInHand() => itensInHand[index];
@@ -64,6 +68,8 @@ namespace Player.Inventory
             if (itensInHand.Count < 1)
                 return;
 
+            InventoryUpdate?.Invoke(index);
+
             if (index < itensInHand.Count)
                 for (int i = 0; i < itensInHand.Count; i++)
                 {
@@ -97,10 +103,22 @@ namespace Player.Inventory
                 //obj.transform.parent = ItemTransform;
                 // obj.transform.position = Vector3.zero;
                 obj = Instantiate(obj, transform);
+                obj.DestroyColliders();
                 itensInHand.Add(obj);
                 obj.Looking(false);
                 index = itensInHand.Count - 1;
                 MainItem();
+            }
+
+            if (itensInHand.Count > 0)
+            {
+                List<Sprite> sprites = new List<Sprite>();
+                for (int i = 0; i < itensInHand.Count; i++)
+                {
+                    sprites.Add(itensInHand[i].item.spriteItem);
+                }
+
+                ItensSpritesUpdate?.Invoke(sprites);
             }
         }
 
@@ -110,6 +128,17 @@ namespace Player.Inventory
             itensInHand.RemoveAt(id);
             index = -1;
             MainItem();
+
+            if (itensInHand.Count > 0)
+            {
+                List<Sprite> sprites = new List<Sprite>();
+                for (int i = 0; i < itensInHand.Count; i++)
+                {
+                    sprites.Add(itensInHand[i].item.spriteItem);
+                }
+
+                ItensSpritesUpdate?.Invoke(sprites);
+            }
         }
 
         public void RemoveItem(ItemBehaviour item)
@@ -123,6 +152,17 @@ namespace Player.Inventory
             itensInHand.Remove(item);
             index = -1;
             MainItem();
+
+            if (itensInHand.Count > 0)
+            {
+                List<Sprite> sprites = new List<Sprite>();
+                for (int i = 0; i < itensInHand.Count; i++)
+                {
+                    sprites.Add(itensInHand[i].item.spriteItem);
+                }
+
+                ItensSpritesUpdate?.Invoke(sprites);
+            }
         }
     }
 }

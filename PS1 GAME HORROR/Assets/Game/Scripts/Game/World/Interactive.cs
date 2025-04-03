@@ -13,7 +13,7 @@ namespace Interactive
         [SerializeField] protected List<Material> materialOutLine;
         protected List<Material> materialBase;
         [Space]
-        [SerializeField] protected ItemBehaviour prefab;
+        [SerializeField] public ItemBehaviour prefab;
 
         bool rayInThisObject = false;
         

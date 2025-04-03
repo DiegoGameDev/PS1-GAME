@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1496527078814491856}
   - component: {fileID: 6648401255453282257}
   - component: {fileID: 2496087040711756368}
+  - component: {fileID: 4890447201338040098}
+  - component: {fileID: 1297374389581434432}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -46,7 +48,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: 2496087040711756368}
+  gameMessage: {fileID: 4890447201338040098}
+  controllerSlots: {fileID: 1297374389581434432}
+  mainCam: {fileID: 0}
   Player: {fileID: 0}
+  itemData: {fileID: 11400000, guid: ef33f1e4306dceb4ea94292b27e1b0b8, type: 2}
+  slotItemSO: {fileID: 11400000, guid: 141e15b8ada753d4195d1e932f874e68, type: 2}
+  gameData:
+    inventoryObject:
+      slots: []
+      clips:
+        item: {fileID: 0}
+        quantity: 0
+      papers: []
 --- !u!114 &2496087040711756368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,3 +73,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd76489fe05a238409240d18b5000ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4890447201338040098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8481697371795929190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7da3d463c83e874aa1cd3b6e0aa24b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+--- !u!114 &1297374389581434432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8481697371795929190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8276bb68f60464da915935157b507b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slotsParent:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -1,3 +1,4 @@
+using Itens;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,28 @@ namespace Single
 
             playerInput.Player.Fire1.performed += Use;
             playerInput.Player.Fire2.performed += InteractItem;
+
+            //dialog
+            playerInput.Dialog.Skip.performed += SkipDialog;
+            playerInput.Dialog.SkipAll.performed += SkipDialog;
+        }
+
+        public void EnablePlayerNormal()
+        {
+            playerInput.Player.Enable();
+            playerInput.Dialog.Disable();
+        }
+
+        public void EnableDialogNormal()
+        {
+            playerInput.Dialog.Enable();
+            playerInput.Player.Disable();
+        }
+
+        private void SkipDialog(InputAction.CallbackContext context)
+        {
+            FindFirstObjectByType<CassetePlayer>().Next();
+            Game.main.dialogManager.Ready();
         }
 
         private void Use(InputAction.CallbackContext context)
