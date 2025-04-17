@@ -1,4 +1,4 @@
-using Interactive;
+using Interactions;
 using Single;
 using UnityEngine;
 using System.Collections.Generic;
@@ -48,6 +48,8 @@ namespace Player.Inventory
                 NullSlot = false;
         }
 
+        public void SaveInventory() => Game.main.SaveInventory(inventoryObject);
+
         public void AddItem(ItemBehaviour item)
         {
             inventoryObject.slots.Add(new SlotObject(item.item, 1));
@@ -60,6 +62,17 @@ namespace Player.Inventory
             playerHand.RemoveItem(item);
             VerifySlots();
         }
+
+        public bool HaveKey(ItemSO key)
+        {
+            for (int i = 0; i < inventoryObject.keys.Count; i++)
+            {
+                if (inventoryObject.keys[i] == key)
+                    return true;
+            }
+
+            return false;
+        }
     }
 
     [System.Serializable]
@@ -67,12 +80,14 @@ namespace Player.Inventory
     {
         public List<SlotObject> slots;
         public SlotObject clips;
+        public List<ItemSO> keys;
         public List<ItemSO> papers;
 
         public InventoryObject(int i)
         {
             slots = new List<SlotObject>();
             clips = new SlotObject();
+            keys = new List<ItemSO>();
             papers = new();
         }
     }

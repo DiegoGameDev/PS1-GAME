@@ -87,13 +87,10 @@ PrefabInstance:
       addedObject: {fileID: 8799828384420754863}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c55f3ac020e043047bfba80a64f15b43, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3591672110059046512}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c55f3ac020e043047bfba80a64f15b43, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -5617597987600474874}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c55f3ac020e043047bfba80a64f15b43, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9110259290155265699}
+      addedObject: {fileID: 3125904231587442116}
   m_SourcePrefab: {fileID: 100100000, guid: c55f3ac020e043047bfba80a64f15b43, type: 3}
 --- !u!1 &4616473296680654674 stripped
 GameObject:
@@ -125,8 +122,8 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
   audioPlayer: {fileID: 8799828384420754863}
+  anim: {fileID: 3125904231587442116}
   VHSPositionEndPlay: {fileID: 0}
-  anim: {fileID: 3591672110059046512}
 --- !u!82 &8799828384420754863
 AudioSource:
   m_ObjectHideFlags: 0
@@ -224,28 +221,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &3591672110059046512
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4616473296680654674}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3687a729a5cf9ec448dddd67d7ddce33, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &-5617597987600474874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -267,23 +242,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8340528, y: 0.41303083, z: 1.783503}
   m_Center: {x: -0.09156859, y: 0, z: 0.02872315}
---- !u!320 &9110259290155265699
-PlayableDirector:
+--- !u!95 &3125904231587442116
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4616473296680654674}
   m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings: []
-  m_ExposedReferences:
-    m_References: []
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3687a729a5cf9ec448dddd67d7ddce33, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &5429883943518883304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c55f3ac020e043047bfba80a64f15b43, type: 3}

@@ -1,10 +1,9 @@
 using DialogueSystem;
-using Interactive;
+using Interactions;
 using Player;
 using Single;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Itens
 {
@@ -13,20 +12,26 @@ namespace Itens
         [Header("CassetePlayer")]
         [SerializeField]
         AudioSource audioPlayer;
+        int lenghtVhs;
+        int index = 0;
         VhsTape vhsTape;
+        [SerializeField] Animator anim;
+        [SerializeField] AudioSource backingTrackVHS;
         [Space]
 
         // a posição que a fita ficara após a ser tocada
         [SerializeField] Transform VHSPositionEndPlay;
-        [SerializeField] Animator anim;
 
         DialogManager dialogManager;
 
-        private readonly int PlayVhs = Animator.StringToHash("PlayVHS");
-        private readonly int EndVhs = Animator.StringToHash("EndVHS");
+
+        [SerializeField] bool _canNext;
 
         float lenghtAudio;
         float countTime;
+
+        private readonly int PLAYVHSANIM = Animator.StringToHash("PlayVHS");
+        private readonly int ENDVHSANIM = Animator.StringToHash("EndVHS");
 
         private void Start()
         {
@@ -38,91 +43,101 @@ namespace Itens
             VhsTape vhs = (VhsTape)item;
 
             // fazer um script que exibe uma mensagem de erro temporariamente
-            if (vhs.VHSAudio == null)
+            if (vhs.audioVhs.clips == null)
             {
                 Game.main.gameMessage.ShowMessage("Insira uma fita cassete para usar o tocador de fitas", GameMessage.TypeMessage.message, 2);
                 return;
             }
                 Game.main.gameMessage.ShowMessage("Você inseriu a fita vhs", GameMessage.TypeMessage.message, 3);
-                
+
+            Game.main.gameInput.EnableDialogNormal();
+            interacting = this;
 
             vhsTape = vhs;
-            vhsTape.CopyTape(vhs);
-            print(vhsTape.IsDialog);
 
-            audioPlayer.clip = vhsTape.VHSAudio;
+            audioPlayer.clip = vhsTape.audioVhs.clips[index];
+            lenghtVhs = vhsTape.audioVhs.clips.Length;
+
             lenghtAudio = audioPlayer.clip.length;
             countTime = 0;
 
             vhsTape = Instantiate(vhsTape, VHSPositionEndPlay.position, Quaternion.identity);
+            vhsTape.gameObject.AddComponent<BoxCollider>();
             vhsTape.gameObject.SetActive(false);
 
             player.inventory.RemoveItem(item);
 
             vhsTape.enabled = true;
-            Play();
-            //anim.SetTrigger(PlayVhs);
+            anim.SetTrigger(PLAYVHSANIM);
+            //Play();
         }
         // chamar no fim da animação da fita cassete entrando no tocador
-        private void Play()
+        public void Play()
         {
-            //audioPlayer.Play();
-
-            //dialog
-            if (vhsTape.IsDialog)
-            {
-                //timelinePlayable.playableAsset = vhsTape.timeLine;
-                vhsTape.name = vhsTape.NameObject;
-                vhsTape.gameObject.AddComponent<BoxCollider>();
-                vhsTape.signal += FrameEvent;
-            vhsTape.timeLine.Play();
-            }
-            else
-            {
-                vhsTape.name = vhsTape.NameObject;
-                vhsTape.gameObject.AddComponent<BoxCollider>();
-                StartCoroutine(playTape(vhsTape));
-            }
+            dialogManager.StartDialog(vhsTape.audioVhs.dialogComponents, vhsTape.vhsPlayed);
+            audioPlayer.Play();
+            StartCoroutine(playTape());
         }
 
-        public void FrameEvent(bool first, bool last)
+        public override void ContinueDialog()
         {
-            if (last)
+            //base.ContinueDialog();
+            if (!_canNext)
             {
-                Game.main.gameInput.EnablePlayerNormal();
+                SkipProcess();
                 return;
             }
-            if (first)
+            if (index == lenghtVhs - 1)
             {
-                dialogManager.StartDialog(vhsTape.DialogComponents, vhsTape.vhsPlayed);
+                anim.SetTrigger(ENDVHSANIM);
                 return;
             }
-            vhsTape.timeLine.Pause();
-        }
 
-        public void Next()
-        {
-            //if (vhsTape != null)
-
+            _canNext = false;
+            index++;
+            countTime = 0;
+            audioPlayer.clip = vhsTape.audioVhs.clips[index];
             dialogManager.Ready();
-            vhsTape.timeLine.Resume();
+            audioPlayer.Play();
+            StartCoroutine(playTape());
         }
 
-        IEnumerator playTape(VhsTape vhs)
+        public void SkipProcess()
         {
-            vhs.gameObject.SetActive(false);
+            StopAllCoroutines();
+            dialogManager.FinishSpeech();
+            countTime = 0;
+            _canNext = true;
+        }
+        IEnumerator playTape()
+        {
+            lenghtAudio = vhsTape.audioVhs.clips[index].length;
+
             while (countTime < lenghtAudio)
             {
                 countTime += Time.deltaTime;
                 yield return new WaitForSeconds(Time.deltaTime);
             }
 
+            dialogManager.FinishSpeech();
+            countTime = 0;
+            _canNext = true;
+
+            //vhs.transform.position = new Vector3(0, 0, 0);
+            
+        }
+
+        public void End()
+        {
             audioPlayer.Stop();
             vhsTape.gameObject.SetActive(true);
             vhsTape.vhsPlayed.Invoke();
             audioPlayer.clip = null;
-            vhs.gameObject.SetActive(true);
-            //vhs.transform.position = new Vector3(0, 0, 0);
+            vhsTape.gameObject.SetActive(true);
+            vhsTape = null;
+
+            interacting = null;
+            //Game.main.gameInput.EnablePlayerNormal();
         }
     }
 }

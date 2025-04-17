@@ -2,7 +2,7 @@ using Player;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Interactive
+namespace Interactions
 {
     public abstract class Interactive : MonoBehaviour
     {
@@ -15,8 +15,9 @@ namespace Interactive
         [Space]
         [SerializeField] public ItemBehaviour prefab;
 
+        public static Interactive interacting;
+
         bool rayInThisObject = false;
-        
 
         public void Looking(bool looking)
         {
@@ -28,10 +29,16 @@ namespace Interactive
                 mesh.SetMaterials(materialBase);
         }
 
+        public virtual void ContinueDialog()
+        {
+
+        }
+
         public virtual void Interact(PlayerController player, ItemBehaviour item)
         {
 
-        }public virtual void Interact(PlayerController player)
+        }
+        public virtual void Interact(PlayerController player)
         {
 
         }

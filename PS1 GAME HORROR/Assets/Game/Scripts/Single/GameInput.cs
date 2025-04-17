@@ -1,3 +1,4 @@
+using Interactions;
 using Itens;
 using Player;
 using UnityEngine;
@@ -30,8 +31,10 @@ namespace Single
             playerInput.Player.Fire2.performed += InteractItem;
 
             //dialog
+            playerInput.Dialog.Enable();
             playerInput.Dialog.Skip.performed += SkipDialog;
             playerInput.Dialog.SkipAll.performed += SkipDialog;
+            playerInput.Dialog.Disable();
         }
 
         public void EnablePlayerNormal()
@@ -48,8 +51,7 @@ namespace Single
 
         private void SkipDialog(InputAction.CallbackContext context)
         {
-            FindFirstObjectByType<CassetePlayer>().Next();
-            Game.main.dialogManager.Ready();
+            Interactive.interacting?.ContinueDialog();
         }
 
         private void Use(InputAction.CallbackContext context)

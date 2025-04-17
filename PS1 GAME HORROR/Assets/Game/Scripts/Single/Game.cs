@@ -51,6 +51,12 @@ namespace Single
         {
             QuitAndSave?.Invoke();
         }
+
+        public void SaveInventory(InventoryObject inventory)
+        {
+            gameData.inventoryObject = inventory;
+        }
+        
     }
 
     [System.Serializable]

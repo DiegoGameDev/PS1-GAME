@@ -1,4 +1,4 @@
-using Interactive;
+using Interactions;
 using Player.Inventory;
 using Single;
 using UnityEngine;
@@ -38,7 +38,7 @@ namespace Player
 
         [SerializeField] TMPro.TextMeshProUGUI text;
         [HideInInspector]
-        public ItemBehaviour item { get; private set; }
+        public Interactive interactiveObject { get; private set; }
 
         private void Awake()
         {
@@ -78,28 +78,28 @@ namespace Player
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward,out RaycastHit hit, distanceRay, interactiveLayer))
             {
-                if (item != hit.collider.GetComponent<ItemBehaviour>() && item)
+                if (interactiveObject != hit.collider.GetComponent<Interactive>() && interactiveObject)
                 {
-                    item.Looking(false);
-                    item = hit.collider.GetComponent<ItemBehaviour>();
+                    interactiveObject.Looking(false);
+                    interactiveObject = hit.collider.GetComponent<Interactive>();
                 }
 
 
-                if (!item) 
-                    item = hit.collider.GetComponent<ItemBehaviour>();
+                if (!interactiveObject) 
+                    interactiveObject = hit.collider.GetComponent<Interactive>();
 
-                item.Looking(true);
-                if (Game.main.gameInput.playerInput.Player.Interact.WasPressedThisFrame() && item != null)
+                interactiveObject.Looking(true);
+                if (Game.main.gameInput.playerInput.Player.Interact.WasPressedThisFrame() && interactiveObject != null && !Interactive.interacting)
                 {
-                    item.Interact(this);
+                    interactiveObject.Interact(this);
                 }
             }
             else
             {
-                if (item)
-                    item.Looking(false);
+                if (interactiveObject)
+                    interactiveObject.Looking(false);
 
-                item = null;
+                interactiveObject = null;
             }
         }
 

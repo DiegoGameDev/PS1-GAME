@@ -30,7 +30,7 @@ namespace DialogueSystem
 
         public void Skip()
         {
-            StopAllCoroutines();
+            StopCoroutine(Speech());
             DialogText.text = text;
             finishiSpeech?.Invoke();
         }

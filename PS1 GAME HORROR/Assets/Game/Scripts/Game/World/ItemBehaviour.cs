@@ -3,7 +3,7 @@ using Player.Inventory;
 using Single;
 using UnityEngine;
 
-namespace Interactive
+namespace Interactions
 {
     public abstract class ItemBehaviour : Interactive
     {
