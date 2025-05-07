@@ -22,11 +22,11 @@ namespace Player.Inventory
 
         private void Start()
         {
+            maxCapaxity = 4;
             controllerSlots = Game.main.controllerSlots;
             InventoryUpdate += controllerSlots.CurrentSlot;
             ItensSpritesUpdate += controllerSlots.UpdateSlotsUI;
             index = -1;
-
         }
 
         public ItemBehaviour ItemInHand() => itensInHand[index];

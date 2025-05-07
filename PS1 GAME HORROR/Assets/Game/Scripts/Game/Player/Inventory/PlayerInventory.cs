@@ -15,16 +15,19 @@ namespace Player.Inventory
 
         private void Awake()
         {
-            //playerHand = GetComponentInChildren<PlayerHand>();
-            inventoryObject = new InventoryObject(0);
+            inventoryObject = Game.main.slotItemSO.inventoryObject;
 
-            if (inventoryObject.slots.Count > 0 && inventoryObject.slots != null)
-            for (int i = 0; i < inventoryObject.slots.Count; i++)
+            if (inventoryObject.slots != null)
             {
-                if (inventoryObject.slots[i].item != null)
-                {
-                    playerHand.Additem(Game.main.itemData.ItemBehaviour(inventoryObject.slots[i].item));           
-                }
+                inventoryObject = new InventoryObject();
+                if (inventoryObject.slots.Count > 0)
+                    for (int i = 0; i < inventoryObject.slots.Count; i++)
+                    {
+                        if (inventoryObject.slots[i].item != null)
+                        {
+                            playerHand.Additem(Game.main.itemData.ItemBehaviour(inventoryObject.slots[i].item));
+                        }
+                    }
             }
 
             VerifySlots();
@@ -32,16 +35,20 @@ namespace Player.Inventory
 
         private void VerifySlots()
         {
-            if ((inventoryObject.slots.Count > 0 && inventoryObject.slots != null))
-                for (int i = 0; i < inventoryObject.slots.Count; i++)
-                {
-                    if (inventoryObject.slots[i].item == null)
+            if (inventoryObject.slots != null)
+            {
+                if (inventoryObject.slots.Count > 0)
+                    for (int i = 0; i < inventoryObject.slots.Count; i++)
                     {
-                        NullSlot = true;
-                        return;
+                        if (inventoryObject.slots[i].item == null)
+                        {
+                            NullSlot = true;
+                            return;
+                        }
                     }
-                }
-            else
+                else
+                    NullSlot = true;
+            }
                 NullSlot = true;
 
             if (playerHand.itensInHand.Count == playerHand.maxCapaxity)

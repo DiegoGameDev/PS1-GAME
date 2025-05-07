@@ -43,7 +43,10 @@ namespace World
         public void LoadScene()
         {
             if (otherScene)
+            {
+                Game.main.Player.inventory.SaveInventory();
                 SceneManager.LoadScene(sceneObject.index);
+            }
             else
             {
                 Game.main.Player.transform.position = PositionInWorld;

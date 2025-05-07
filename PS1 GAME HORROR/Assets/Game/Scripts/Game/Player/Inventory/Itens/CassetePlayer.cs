@@ -130,6 +130,7 @@ namespace Itens
         public void End()
         {
             audioPlayer.Stop();
+            dialogManager.Ready();
             vhsTape.gameObject.SetActive(true);
             vhsTape.vhsPlayed.Invoke();
             audioPlayer.clip = null;

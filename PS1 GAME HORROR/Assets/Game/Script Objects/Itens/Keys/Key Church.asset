@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c662d1d66d829b64690b198f7ca1db6d, type: 3}
-  m_Name: Slot
+  m_Script: {fileID: 11500000, guid: 75ce12ae6e2d3f64499007ebbcf6bd84, type: 3}
+  m_Name: Key Church
   m_EditorClassIdentifier: 
-  inventoryObject:
-    slots: []
-    clips:
-      item: {fileID: 0}
-      quantity: 0
-    keys: []
-    papers: []
+  <NameItem>k__BackingField: 
+  <Description>k__BackingField: 
+  <spriteItem>k__BackingField: {fileID: 0}
+  <typeItem>k__BackingField: 0

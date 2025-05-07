@@ -37,9 +37,9 @@ namespace DialogueSystem
         {
             if (estateDialog == EstateDialog.Ready)
             {
+                index++;
                 if (index < dialogComponents.dialog.Count)
                 {
-                    index++;
                     dialogWriter.StartWriter(dialogComponents.dialog[index].text, dialogComponents.dialog[index].profile);
                     estateDialog = EstateDialog.Writing;
                     SkipDialog?.Invoke();
