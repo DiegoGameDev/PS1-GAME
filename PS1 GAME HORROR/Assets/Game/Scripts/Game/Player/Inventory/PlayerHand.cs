@@ -149,7 +149,9 @@ namespace Player.Inventory
             for (int i = 0; i < itensInHand.Count; i++)
             {
                 if (itensInHand[i] == item)
-                    Destroy(itensInHand[i].gameObject);
+                    itensInHand.Remove(itensInHand[i]);
+
+                    //Destroy(itensInHand[i].gameObject);
             }
 
             itensInHand.Remove(item);

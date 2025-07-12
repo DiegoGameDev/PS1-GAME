@@ -45,10 +45,10 @@ namespace Itens
             // fazer um script que exibe uma mensagem de erro temporariamente
             if (vhs.audioVhs.clips == null)
             {
-                Game.main.gameMessage.ShowMessage("Insira uma fita cassete para usar o tocador de fitas", GameMessage.TypeMessage.message, 2);
+                //Game.main.gameMessage.ShowMessage("Insira uma fita cassete para usar o tocador de fitas", GameMessage.TypeMessage.message, 2);
                 return;
             }
-                Game.main.gameMessage.ShowMessage("Você inseriu a fita vhs", GameMessage.TypeMessage.message, 3);
+                //Game.main.gameMessage.ShowMessage("Você inseriu a fita vhs", GameMessage.TypeMessage.message, 3);
 
             vhsTape = vhs;
             if (vhsTape == null)
@@ -66,6 +66,8 @@ namespace Itens
 
             lenghtAudio = audioPlayer.clip.length;
             countTime = 0;
+
+            //vhsTape.transform.parent = null;
 
             vhsTape = Instantiate(vhsTape, VHSPositionEndPlay.position, Quaternion.identity);
             vhsTape.gameObject.AddComponent<BoxCollider>();
@@ -138,9 +140,9 @@ namespace Itens
             audioPlayer.Stop();
             dialogManager.Ready();
             vhsTape.gameObject.SetActive(true);
-            vhsTape.vhsPlayed.Invoke(Game.main.Player);
+            //vhsTape.vhsPlayed.Invoke(Game.main.Player);
             audioPlayer.clip = null;
-            vhsTape.gameObject.SetActive(true);
+            //vhsTape.gameObject.SetActive(true);
             vhsTape = null;
 
             interacting = null;

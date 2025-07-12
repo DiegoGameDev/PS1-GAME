@@ -1,3 +1,4 @@
+using Player;
 using Single;
 using System;
 using UnityEngine;
@@ -16,13 +17,13 @@ namespace DialogueSystem
         int index;
 
         //events
-        UnityEvent EndDialog;
+        UnityEvent<PlayerController> EndDialog;
         public Action SkipDialog { get; private set; }
         public Action SkipallDialog { get; private set; }
 
         [SerializeField] GameObject panel;
 
-        public void StartDialog(DialogComponents dialogComponents, UnityEvent @event)
+        public void StartDialog(DialogComponents dialogComponents, UnityEvent<PlayerController> @event)
         {
             panel.SetActive(true);
             dialogWriter.finishiSpeech += FinishSpeech;
@@ -48,7 +49,7 @@ namespace DialogueSystem
                 {
                     index = 0;
                     estateDialog = EstateDialog.Finish;
-                    EndDialog?.Invoke();
+                    EndDialog?.Invoke(Game.main.Player);
                     dialogWriter.End();
                     panel.SetActive(false);
                     Game.main.gameInput.EnablePlayerNormal();

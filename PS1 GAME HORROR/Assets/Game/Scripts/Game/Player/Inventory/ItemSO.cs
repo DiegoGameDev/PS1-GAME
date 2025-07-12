@@ -2,7 +2,7 @@
 
 namespace Player.Inventory
 {
-    [CreateAssetMenu(fileName = "Item", menuName = "STNGAME/INVENTORY/ITEM")]
+    [CreateAssetMenu(fileName = "Item", menuName = "STNGAME/INVENTORY/ITEM/ITEM")]
     public class ItemSO : ScriptableObject
     {
         [field: SerializeField]

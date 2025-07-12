@@ -20,6 +20,7 @@ namespace Itens
                 return;
 
             obj.Interact(player ,this);
+            player.inventory.RemoveItem(this);
         }
 
         public override void Interact(PlayerController player)
