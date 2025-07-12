@@ -9,7 +9,7 @@ namespace Single
         public enum TypeMessage { error, message, monodialog}
         [Header("Canvas Components")]
         [SerializeField] TextMeshProUGUI text;
-        float timeInScreen;
+        [SerializeField] float timeInScreen = 2;
 
         bool TextInScreen;
 

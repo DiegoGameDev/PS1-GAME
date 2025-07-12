@@ -29,7 +29,7 @@ namespace Interactions
 
         private void OnEnable()
         {
-            prefab = Game.main.itemData.ItemBehaviour(item);
+            //prefab = Game.main.itemData.ItemBehaviour(item);
         }
 
         public void DestroyColliders()
@@ -37,6 +37,7 @@ namespace Interactions
             if (coll != null)
                 Destroy(coll);
         }
+        public void ActiveColliders() => coll.enabled = true;
 
         public void SetEstate(EstateItemBehaviour estate) => estateItemBehaviour = estate;
 

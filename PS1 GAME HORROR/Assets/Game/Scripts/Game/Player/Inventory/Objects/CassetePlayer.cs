@@ -50,10 +50,16 @@ namespace Itens
             }
                 Game.main.gameMessage.ShowMessage("Você inseriu a fita vhs", GameMessage.TypeMessage.message, 3);
 
+            vhsTape = vhs;
+            if (vhsTape == null)
+            {
+                Destroy(vhs.gameObject);
+                return;
+            }
+
             Game.main.gameInput.EnableDialogNormal();
             interacting = this;
 
-            vhsTape = vhs;
 
             audioPlayer.clip = vhsTape.audioVhs.clips[index];
             lenghtVhs = vhsTape.audioVhs.clips.Length;
@@ -132,7 +138,7 @@ namespace Itens
             audioPlayer.Stop();
             dialogManager.Ready();
             vhsTape.gameObject.SetActive(true);
-            vhsTape.vhsPlayed.Invoke();
+            vhsTape.vhsPlayed.Invoke(Game.main.Player);
             audioPlayer.clip = null;
             vhsTape.gameObject.SetActive(true);
             vhsTape = null;

@@ -9,7 +9,7 @@ namespace Itens
     public sealed class VhsTape : ItemBehaviour
     {
         [Header("VHS")]
-        public UnityEvent vhsPlayed;
+        public UnityEvent<PlayerController> vhsPlayed;
         public AudioVHS audioVhs;
 
         public override void Use(PlayerController player)
@@ -24,21 +24,16 @@ namespace Itens
 
         public override void Interact(PlayerController player)
         {
-            //base.Interact(player);
-
             if (!player.inventory.NullSlot)
                 return;
 
             // atrib this vhs in prefab
-            var vhs = (VhsTape)prefab;
-            vhs.prefab = prefab;
-            vhs.audioVhs = audioVhs;
-            vhs.vhsPlayed = vhsPlayed;
+            transform.rotation = prefab.transform.rotation;
+            transform.position = prefab.transform.position;
 
-            vhs.SetEstate(EstateItemBehaviour.Hand);
-            Destroy(vhs.coll);
-            player.inventory.AddItem(vhs);
-            Destroy(gameObject);
+            SetEstate(EstateItemBehaviour.Hand);
+            DestroyColliders();
+            player.inventory.AddItem(this);
         }
 
         public void CopyTape(VhsTape vhs)

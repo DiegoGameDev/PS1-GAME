@@ -1,5 +1,6 @@
 using Interactions;
 using Player;
+using Player.Inventory;
 using UnityEngine;
 
 namespace Itens
@@ -7,8 +8,12 @@ namespace Itens
     public sealed class Crates : ItemBehaviour
     {
         [Header("Crates")]
-        //[SerializeField] ItemBehaviour itemInCrates;
+        [SerializeField] ItemBehaviour itemInCrates;
+        [SerializeField] Key key;
+        [Space]
         [SerializeField] LayerMask derfaultLayer;
+
+        [SerializeField] bool itemIsKey = false;
 
         public override void Interact(PlayerController player)
         {
@@ -20,11 +25,22 @@ namespace Itens
             if (!player.inventory.NullSlot)
                 return;
 
-            prefab.SetEstate(EstateItemBehaviour.Hand);
-            prefab.gameObject.SetActive(true);
-            player.inventory.AddItem(prefab);
+            if (itemIsKey)
+            {
+                player.inventory.AddKeys(key);
+                gameObject.layer = derfaultLayer.value;
+                Looking(false);
+                return;
+            }
+
+            player.inventory.AddItem(itemInCrates);
             gameObject.layer = derfaultLayer.value;
             Looking(false);
+        }
+
+        public void AddItemToPlayer(PlayerController player)
+        {
+            player.inventory.AddKeys(key);
         }
     }
 }

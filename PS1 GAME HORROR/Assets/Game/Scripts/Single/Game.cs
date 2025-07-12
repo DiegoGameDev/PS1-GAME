@@ -38,13 +38,23 @@ namespace Single
         private void Awake()
         {
             main = this;
-            slotItemSO.inventoryObject = SaveManager.LoadData().inventoryObject;
+            gameData = SaveManager.LoadData();
+
+            if (gameData == null)
+            {
+                gameData = new();
+                SaveManager.SaveData(gameData);
+            }
+
+            Player.inventory.inventoryObject = gameData.inventoryObject;
 
             mainCam = FindFirstObjectByType<Camera>();
             Player = FindFirstObjectByType<PlayerController>();
             dialogManager = FindFirstObjectByType<DialogManager>();
             cassetePlayer = FindFirstObjectByType<CassetePlayer>();
             gameInput = GetComponent<GameInput>();
+
+            QuitAndSave += Player.inventory.SaveInventory;
 
             //gameData.inventoryObject = slotItemSO.inventoryObject;
         }
@@ -67,11 +77,11 @@ namespace Single
     }
 
     [System.Serializable]
-    public struct GameData
+    public class GameData
     {
         public InventoryObject inventoryObject;
 
-        public GameData(int quantity = 0)
+        public GameData()
         {
             inventoryObject = new InventoryObject();
         }

@@ -8,6 +8,9 @@ namespace Itens
     {
         [Header("Lantern")]
         [SerializeField] Light lightComponent;
+
+        public int energy;
+
         bool turnOn = true;
 
         public override void Use(PlayerController player)
@@ -29,11 +32,18 @@ namespace Itens
             if (!player.inventory.NullSlot)
                 return;
 
+            coll.enabled = false;
+            //prefab.SetEstate(EstateItemBehaviour.Hand);
+
+            transform.position = prefab.transform.position;
+            transform.rotation = prefab.transform.rotation;
+
             DestroyColliders();
-            prefab.SetEstate(EstateItemBehaviour.Hand);
+            SetEstate(EstateItemBehaviour.Hand);
+            Looking(false);
             //prefab.Looking(false);
-            player.inventory.AddItem(prefab);
-            Destroy(gameObject);
+            player.inventory.AddItem(this);
+            //Destroy(gameObject);
         }
     }
 }

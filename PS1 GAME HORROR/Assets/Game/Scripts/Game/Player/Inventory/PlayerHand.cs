@@ -52,6 +52,7 @@ namespace Player.Inventory
         {
             if (index != -1)
             {
+                if (itensInHand[index] != null)
                 itensInHand[index].Use(Game.main.Player);
             }
                 
@@ -100,12 +101,14 @@ namespace Player.Inventory
         {
             if (itensInHand.Count < maxCapaxity)
             {
-                //obj.transform.parent = ItemTransform;
-                // obj.transform.position = Vector3.zero;
-                obj = Instantiate(obj, transform);
-                obj.DestroyColliders();
-                itensInHand.Add(obj);
-                obj.Looking(false);
+                //obj.DestroyColliders();
+                //obj.transform.parent = transform;
+                //obj.transform.localPosition = Vector3.zero;
+                //obj.transform.localEulerAngles = Vector3.zero;
+
+                var objs = Instantiate(obj, transform);
+                objs.Looking(false);
+                itensInHand.Add(objs);
                 index = itensInHand.Count - 1;
                 MainItem();
             }

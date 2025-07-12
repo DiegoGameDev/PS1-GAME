@@ -14,6 +14,8 @@ namespace Player.Inventory
         public Sprite spriteItem { get; protected set; }
         [field: SerializeField]
         public TypeItem typeItem { get; protected set; }
+        [field: SerializeField]
+        public int QuantityMax { get; protected set; } = 1;
     }
     public enum TypeItem { Default, Papers, Key, Clips}
 }

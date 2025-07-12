@@ -1,28 +1,40 @@
 
 
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace Single
 {
     public sealed class SaveManager
     {
-        static string path = "/Data.json";
         public static void SaveData(GameData data)
         {
-            string file = JsonUtility.ToJson(data, true);
-            File.Create(Application.persistentDataPath);
-            File.WriteAllText(Application.persistentDataPath + path, file);
+            BinaryFormatter binary = new BinaryFormatter();
+            string path = Application.persistentDataPath + "Memory Pine Lake\\Data.penis";
+            FileStream file = new FileStream(path, FileMode.Create);
+
+            binary.Serialize(file, data);
+            file.Close();
         }
 
         public static GameData LoadData()
         {
-            if (File.Exists(Application.persistentDataPath + path))
+            if (File.Exists(Application.persistentDataPath + "Memory Pine Lake\\Data.penis"))
             {
-                string json = File.ReadAllText(Application.persistentDataPath + path);
-                return JsonUtility.FromJson<GameData>(json);
+                BinaryFormatter binary = new BinaryFormatter();
+                FileStream file = new FileStream(Application.persistentDataPath + "Memory Pine Lake\\Data.penis", FileMode.Open);
+
+                var obj = (GameData)binary.Deserialize(file);
+                file.Close();
+                return obj;
             }
-            return new GameData();
+            else
+            {
+                Debug.LogError("Free fire");
+                return null;
+            }
+
         }
     }
 }

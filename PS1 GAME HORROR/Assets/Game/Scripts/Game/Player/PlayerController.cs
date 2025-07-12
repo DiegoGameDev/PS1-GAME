@@ -12,7 +12,7 @@ namespace Player
 
         [Header("Inventory")]
         [field : SerializeField]
-        public PlayerInventory inventory { get; private set; }
+        public PlayerInventory inventory { get; set; }
 
         [Header("Player Settings")]
         [SerializeField] float velocityMove;
@@ -38,7 +38,7 @@ namespace Player
 
         [SerializeField] TMPro.TextMeshProUGUI text;
         [HideInInspector]
-        public Interactive interactiveObject { get; private set; }
+        public IInteractive interactiveObject { get; private set; }
 
         private void Awake()
         {
@@ -78,17 +78,18 @@ namespace Player
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward,out RaycastHit hit, distanceRay, interactiveLayer))
             {
-                if (interactiveObject != hit.collider.GetComponent<Interactive>() && interactiveObject)
+                if (interactiveObject != hit.collider.GetComponent<IInteractive>() && interactiveObject != null)
                 {
                     interactiveObject.Looking(false);
-                    interactiveObject = hit.collider.GetComponent<Interactive>();
+                    interactiveObject = hit.collider.GetComponent<IInteractive>();
                 }
 
 
-                if (!interactiveObject) 
-                    interactiveObject = hit.collider.GetComponent<Interactive>();
-
-                interactiveObject.Looking(true);
+                if (interactiveObject == null)
+                {
+                    interactiveObject = hit.collider.GetComponent<IInteractive>();
+                }
+                    interactiveObject.Looking(true);
                 if (Game.main.gameInput.playerInput.Player.Interact.WasPressedThisFrame() && interactiveObject != null && !Interactive.interacting)
                 {
                     interactiveObject.Interact(this);
@@ -96,7 +97,7 @@ namespace Player
             }
             else
             {
-                if (interactiveObject)
+                if (interactiveObject != null)
                     interactiveObject.Looking(false);
 
                 interactiveObject = null;

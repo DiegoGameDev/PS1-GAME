@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Interactions
 {
-    public abstract class Interactive : MonoBehaviour
+    public abstract class Interactive : MonoBehaviour, IInteractive
     {
         [Header("Interactive Settings")]
         public string NameObject;

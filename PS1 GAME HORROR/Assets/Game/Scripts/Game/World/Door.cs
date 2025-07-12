@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace World
 {
-    public sealed class Door : ItemBehaviour
+    public class Door : MonoBehaviour, IInteractive
     {
         [SerializeField] bool otherScene = true;
 
@@ -15,7 +15,7 @@ namespace World
 
         [Space]
         [SerializeField] SceneObject sceneObject;
-        [SerializeField] ItemSO key;
+        [SerializeField] Key key;
         [Space]
 
         [SerializeField] GameObject DoorTrackOpening;
@@ -23,20 +23,30 @@ namespace World
         [Space]
 
         [SerializeField] GameObject map;
+        [Space]
+        [SerializeField] string messageNoKey;
 
-        public override void Interact(PlayerController player)
+        public virtual void Interact(PlayerController player)
         {
             if (player.inventory.HaveKey(key) && key != null)
             {
                 DoorTrackOpening.SetActive(true);
                 Cam.SetActive(true);
                 map.SetActive(false);
+
+                Invoke("LoadScene", 2.1f);
             }
+            else
+            {
+                Game.main.gameMessage.ShowMessage(messageNoKey, GameMessage.TypeMessage.message);
+            }
+
             if (key == null)
             {
                 DoorTrackOpening.SetActive(true);
                 Cam.SetActive(true);
                 map.SetActive(false);
+                Invoke("LoadScene", 2.1f);
             }
         }
 
@@ -54,6 +64,11 @@ namespace World
                 DoorTrackOpening.SetActive(false);
                 map.SetActive(true);
             }
+        }
+
+        public void Looking(bool looking)
+        {
+            
         }
     }
 
