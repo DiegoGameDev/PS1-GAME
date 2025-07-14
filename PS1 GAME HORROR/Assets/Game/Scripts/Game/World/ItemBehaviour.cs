@@ -13,9 +13,6 @@ namespace Interactions
 
         protected Collider coll;
 
-        [Space]
-        public TransformItemInHand TransformItemInHand = new TransformItemInHand();
-
         private void Awake()
         {
             coll = GetComponent<Collider>();
@@ -35,7 +32,7 @@ namespace Interactions
         public void DestroyColliders()
         {
             if (coll != null)
-                Destroy(coll);
+                coll.enabled = false;
         }
         public void ActiveColliders() => coll.enabled = true;
 

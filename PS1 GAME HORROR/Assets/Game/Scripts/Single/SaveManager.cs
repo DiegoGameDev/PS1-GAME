@@ -11,7 +11,7 @@ namespace Single
         public static void SaveData(GameData data)
         {
             BinaryFormatter binary = new BinaryFormatter();
-            string path = Application.persistentDataPath + "Memory Pine Lake\\Data.penis";
+            string path = Application.persistentDataPath + "Memory Pine Lake\\Data.json";
             FileStream file = new FileStream(path, FileMode.Create);
 
             binary.Serialize(file, data);
@@ -20,10 +20,10 @@ namespace Single
 
         public static GameData LoadData()
         {
-            if (File.Exists(Application.persistentDataPath + "Memory Pine Lake\\Data.penis"))
+            if (File.Exists(Application.persistentDataPath + "Memory Pine Lake\\Data.json"))
             {
                 BinaryFormatter binary = new BinaryFormatter();
-                FileStream file = new FileStream(Application.persistentDataPath + "Memory Pine Lake\\Data.penis", FileMode.Open);
+                FileStream file = new FileStream(Application.persistentDataPath + "Memory Pine Lake\\Data.json", FileMode.Open);
 
                 var obj = (GameData)binary.Deserialize(file);
                 file.Close();

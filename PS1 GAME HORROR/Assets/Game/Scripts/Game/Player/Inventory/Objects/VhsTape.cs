@@ -34,6 +34,7 @@ namespace Itens
 
             SetEstate(EstateItemBehaviour.Hand);
             DestroyColliders();
+            Looking(false);
             player.inventory.AddItem(this);
         }
 

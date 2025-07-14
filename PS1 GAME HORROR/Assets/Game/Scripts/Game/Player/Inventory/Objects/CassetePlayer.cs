@@ -51,6 +51,13 @@ namespace Itens
                 //Game.main.gameMessage.ShowMessage("Você inseriu a fita vhs", GameMessage.TypeMessage.message, 3);
 
             vhsTape = vhs;
+            vhsTape.transform.parent = null;
+            vhsTape.transform.position = VHSPositionEndPlay.position;
+            vhsTape.transform.eulerAngles = Vector3.zero;
+            vhsTape.ActiveColliders();
+            vhsTape.Looking(false);
+            vhsTape.gameObject.SetActive(false);
+
             if (vhsTape == null)
             {
                 Destroy(vhs.gameObject);
@@ -67,13 +74,13 @@ namespace Itens
             lenghtAudio = audioPlayer.clip.length;
             countTime = 0;
 
-            //vhsTape.transform.parent = null;
+            ////vhsTape.transform.parent = null;
 
-            vhsTape = Instantiate(vhsTape, VHSPositionEndPlay.position, Quaternion.identity);
-            vhsTape.gameObject.AddComponent<BoxCollider>();
-            vhsTape.gameObject.SetActive(false);
+            //vhsTape = Instantiate(vhsTape, VHSPositionEndPlay.position, Quaternion.identity);
+            //vhsTape.gameObject.AddComponent<BoxCollider>();
+            //vhsTape.gameObject.SetActive(false);
 
-            player.inventory.RemoveItem(item);
+            //player.inventory.RemoveItem(item);
 
             vhsTape.enabled = true;
             anim.SetTrigger(PLAYVHSANIM);
@@ -130,9 +137,6 @@ namespace Itens
             dialogManager.FinishSpeech();
             countTime = 0;
             _canNext = true;
-
-            //vhs.transform.position = new Vector3(0, 0, 0);
-            
         }
 
         public void End()
@@ -141,7 +145,7 @@ namespace Itens
             dialogManager.Ready();
             vhsTape.gameObject.SetActive(true);
             //vhsTape.vhsPlayed.Invoke(Game.main.Player);
-            audioPlayer.clip = null;
+            audioPlayer.clip = null; 
             //vhsTape.gameObject.SetActive(true);
             vhsTape = null;
 
